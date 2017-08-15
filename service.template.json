@@ -1,0 +1,27 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "${cs_application}-${cs_lane}",
+    "labels": {
+      "name": "${cs_application}-${cs_lane}"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+		"name":"http",
+        "port": 80,
+        "targetPort": 8090
+      },
+      {
+		"name":"admin",
+        "port": 91,
+        "targetPort": 8091
+      }
+    ],
+    "selector": {
+      "name": "${cs_application}-${cs_lane}"
+    }
+  }
+}

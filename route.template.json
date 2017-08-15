@@ -1,0 +1,16 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "${cs_application}-${cs_lane}"
+  },
+  "spec": {
+    "host": "${cs_application}.${cs_lane}.${cs_project}.${cs_cluster}.cs.eb.lan.at",
+    "to": {
+      "name": "${cs_application}-${cs_lane}"
+    },
+    "port": {
+      "targetPort" : "http"
+    }
+  }
+}

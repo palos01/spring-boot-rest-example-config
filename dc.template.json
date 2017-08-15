@@ -1,0 +1,105 @@
+{
+    "kind":"DeploymentConfig",
+    "apiVersion":"v1",
+    "metadata":{
+        "name":"${cs_application}-${cs_lane}",
+        "labels":{
+            "name":"${cs_application}-${cs_lane}"
+        }
+    },
+    "spec":{
+        "replicas": ${replications},
+        "selector":{
+            "name":"${cs_application}-${cs_lane}"
+        },
+        "strategy": {
+            "type": "Rolling",
+            "rollingParams": {
+                "updatePeriodSeconds": 1,
+                "intervalSeconds": 1,
+                "timeoutSeconds": 600,
+                "maxUnavailable": "25%",
+                "maxSurge": "25%"
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "type": "ImageChange",
+                "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                        "${cs_application}-${cs_lane}"
+                    ],
+                    "from": {
+                        "kind": "ImageStreamTag",
+                        "namespace": "${cs_project}",
+                        "name": "${cs_application}:${cs_lane}-lane"
+                    }
+                }
+            }
+        ],
+        "template":{
+            "metadata":{
+                "labels":{
+                    "name":"${cs_application}-${cs_lane}"
+                }
+            },
+            "spec":{
+                "containers":[
+                    {
+                        "name":"${cs_application}-${cs_lane}",
+                        "image":"${cs_project}/${cs_application}",
+                        "imagePullPolicy" : "IfNotPresent",
+                        "resources":{
+                            "limits":{
+                                "cpu":"1",
+                                "memory":"500M"
+                            },
+                            "requests":{
+                                "cpu":"100m",
+                                "memory":"250M"
+                            }
+                        },
+                        "livenessProbe":{
+                            "enabled":false,
+                            "initialDelaySeconds":120,
+                            "timeoutSeconds":5,
+                            "tcpSocket":{
+                                "port":8090
+                            }
+                        },
+                        "readinessProbe":{
+                            "enabled":false,
+                            "type":"http",
+                            "initialDelaySeconds":60,
+                            "timeoutSeconds":5,
+                            "httpGet":{
+                                "path":"/info",
+                                "port":8091
+                            }
+                        },
+                        "volumeMounts":[
+                          {
+                            "name":"props-volume",
+                            "mountPath":"/opt/app/etc/props",
+                            "readOnly":true
+                          }
+                        ]
+                    }
+                ],
+                "volumes":[
+                  {
+                  "name":"props-volume",
+                  "secret":{
+                    "secretName":"${cs_application}-${cs_lane}-props"
+                  }
+                }
+              ]
+            }
+        }
+    }
+}
