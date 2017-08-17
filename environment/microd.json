@@ -1,3 +1,6 @@
 {
-  "replications" : 1
+  "replications" : 1,
+  "java" : {
+      "xmx" : "-Xmx128M"
+  }
 }

@@ -54,6 +54,12 @@
                         "name":"${cs_application}-${cs_lane}",
                         "image":"${cs_project}/${cs_application}",
                         "imagePullPolicy" : "IfNotPresent",
+                        "env" : [
+                            {"name": "JAVA_MX", "value" : "${java.xmx}"},
+                            {"name": "APP_CLUSTER", "value" : "${cs_cluster}"},
+                            {"name": "APP_LANE", "value" : "${cs_lane}"},
+                            {"name": "CUSTOM_GREETING", "value" : "Ahoj"}
+                        ],
                         "resources":{
                             "limits":{
                                 "cpu":"1",
