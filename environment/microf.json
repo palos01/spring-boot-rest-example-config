@@ -1,5 +1,6 @@
 {
   "replications" : 2,
+  "greeting" : "Ahoj FAT",
   "java" : {
       "xmx" : "-Xmx178M"
   }

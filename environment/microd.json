@@ -1,5 +1,6 @@
 {
   "replications" : 1,
+  "greeting" : "Ahoj DEV",
   "java" : {
       "xmx" : "-Xmx128M"
   }

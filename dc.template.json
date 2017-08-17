@@ -58,7 +58,7 @@
                             {"name": "JAVA_MX", "value" : "${java.xmx}"},
                             {"name": "APP_CLUSTER", "value" : "${cs_cluster}"},
                             {"name": "APP_LANE", "value" : "${cs_lane}"},
-                            {"name": "CUSTOM_GREETING", "value" : "Ahoj"}
+                            {"name": "CUSTOM_GREETING", "value" : "${greeting}"}
                         ],
                         "resources":{
                             "limits":{
