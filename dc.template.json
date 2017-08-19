@@ -58,7 +58,8 @@
                             {"name": "JAVA_MX", "value" : "${java.xmx}"},
                             {"name": "APP_CLUSTER", "value" : "${cs_cluster}"},
                             {"name": "APP_LANE", "value" : "${cs_lane}"},
-                            {"name": "CUSTOM_GREETING", "value" : "${greeting}"}
+                            {"name": "CUSTOM_GREETING", "value" : "${greeting}"},
+                            {"name": "SPRING_CONFIG_LOCATION", "value" : "/opt/app/etc/props/app.properties"}
                         ],
                         "resources":{
                             "limits":{
